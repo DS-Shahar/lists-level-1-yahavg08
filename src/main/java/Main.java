@@ -31,8 +31,8 @@ public static Node<Integer> ex1 (int []arr) {
     public static void printList(Node<Integer> head) {
         Node<Integer> current = head;
         while (current != null) {
-            System.out.println(current.getValue()); // מדפיס את הערך של הצומת הנוכחי
-            current = current.getNext(); // מתקדם לצומת הבא
+            System.out.println(current.getValue()); 
+            current = current.getNext(); 
         }
     }
   
@@ -106,20 +106,20 @@ public static Node<Integer> ex1 (int []arr) {
     }
 
   public  Node<Integer> deleteNode (Node <Integer> head, int x) {
-		Node <Integer> p = new Node <Integer> (-1, head);
-		head = p;
-		while (p.hasNext()) {
-			Node <Integer> t;
-			if (p.getNext().getValue() == x) {
-				t = p.getNext();
-				p.setNext(p.getNext().getNext());
-				t.setNext(null);
-				return head.getNext();
-			}
-			p = p.getNext();
-		}
+  Node <Integer> p = new Node <Integer> (-1, head);
+  head = p;
+  while (p.hasNext()) {
+	Node <Integer> t;
+	if (p.getNext().getValue() == x) {
+		t = p.getNext();
+		p.setNext(p.getNext().getNext());
+		t.setNext(null);
 		return head.getNext();
 	}
+	p = p.getNext();
+}
+return head.getNext();
+}
 
   public Node<Integer> deleteNodeAtIndex(Node<Integer> head, int index) {
     if (index < 0 || head == null) {
