@@ -121,7 +121,7 @@ public static Node<Integer> ex1 (int []arr) {
 return head.getNext();
 }
 
-  public Node<Integer> deleteNodeAtIndex(Node<Integer> head, int index) {
+  public Node<Integer> deleteNodeIndex(Node<Integer> head, int index) {
     if (index < 0 || head == null) {
         return head;
     }
