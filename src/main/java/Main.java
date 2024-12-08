@@ -1,22 +1,30 @@
-package lists;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {    
-        int[] arr = {1, 2, 3, 4};
-        System.out.println(ex1(arr));
+        int[] arr = {1, 2, 5, 3};
+        int[] arr2 = {1, 5,2,8,4};
+        System.out.println("ex1: " + ex1(arr));
         Node<Integer> head = ex1(arr);
-        Node<Integer> head2 = ex1(arr);
+        Node<Integer> head2 = ex1(arr2);
+        Node<Integer> head3 = null;
+        System.out.println("printList:");
         printList(head);
+        System.out.println("prinList2:");
         prinList2(head);
+        System.out.println("prinList3:");
         prinList3(head);
-        System.out.print(inputList());
+        System.out.println("ex3: " + inputList());
+        System.out.println("zoogi:");
         zoogi(head);
-        System.out.print(ex5(head, 4));
-        System.out.print(ex5B(head, 4));
-        System.out.print(deleteNode(head, 3));
-        System.out.print(deleteNodeIndex(head, 3));
-        System.out.print(ex8(head, head2));
+        System.out.println("ex5A: " + ex5(head, 2));
+        System.out.println("ex5B: " + ex5B(head, 4));
+        //System.out.println("ex6: " + deleteNode(head, 3));
+        //System.out.println("ex7: " + deleteNodeIndex(head, 1));
+        System.out.println("ex8: " + ex8(head, head2,head2));
+        System.out.println("ex9:");
+        ex9(head, head2,head2);
+        System.out.println("ex10: " + ex10(head, head2, head3, head2 ));
     }
 
     public static Node<Integer> ex1(int[] arr) {
@@ -71,6 +79,7 @@ public class Main {
             System.out.println("Enter number:");
             num = reader.nextInt();
         }
+        reader.close();
         return head;
     }
 
@@ -106,19 +115,21 @@ public class Main {
     }
 
     public static Node<Integer> deleteNode(Node<Integer> head, int x) {
-        Node<Integer> p = new Node<>(-1, head);
-        head = p;
-        while (p.hasNext()) {
-            Node<Integer> t;
-            if (p.getNext().getValue() == x) {
-                t = p.getNext();
-                p.setNext(p.getNext().getNext());
-                t.setNext(null);
-                return head.getNext();
-            }
-            p = p.getNext();
+        if (head == null) {
+            return null;
         }
-        return head.getNext();
+        if (head.getValue() == x) {
+            return head.getNext();
+        }
+        Node<Integer> current = head;
+        while (current.getNext() != null) {
+            if (current.getNext().getValue() == x) {
+                current.setNext(current.getNext().getNext());
+                return head;
+            }
+            current = current.getNext();
+        }
+        return head;
     }
 
     public static Node<Integer> deleteNodeIndex(Node<Integer> head, int index) {
@@ -128,25 +139,57 @@ public class Main {
         if (index == 0) {
             return head.getNext();
         }
-        Node<Integer> p = head;
+        Node<Integer> current = head;
         int currentIndex = 0;
-        while (p.hasNext() && currentIndex < index - 1) {
-            p = p.getNext();
+        while (current.getNext() != null && currentIndex < index - 1) {
+            current = current.getNext();
             currentIndex++;
         }
-        if (p.hasNext() && currentIndex == index - 1) {
-            p.setNext(p.getNext().getNext());
+        if (current.getNext() != null) {
+            current.setNext(current.getNext().getNext());
         }
         return head;
     }
 
-    public static boolean ex8(Node<Integer> head, Node<Integer> head2) {
-        if (head == null && head2 == null) {
-            return true;
-        }
-        if (head == null || head2 == null || head.getValue() != head2.getValue()) {
-            return false;
-        }
-        return ex8(head.getNext(), head2.getNext());
+    public static boolean ex8(Node<Integer> head, Node<Integer> head2,Node<Integer> p2) {
+    	        if ( head== null) {
+    	            return true;
+    	        }
+    	        if ( head2== null) {
+    	            return false;
+    	        }
+    	        if ( head.getValue() != head2.getValue()) {
+    	        return ex8(head, head2.getNext(),p2);
+    	    }
+    	        return ex8(head.getNext(),p2, p2);
     }
+    public static void ex9(Node<Integer> head, Node<Integer> head2,Node<Integer> p2) {
+    	while(head != null && head2 != null) {
+        if ( head.getValue() == head2.getValue()) {
+        	System.out.println(head.getValue());
+        	head= head.getNext();
+        	head2=p2;
+        }
+        	head2=head2.getNext();
+    	}
+    }
+    
+    public static Node<Integer> ex10(Node<Integer> head, Node<Integer> head2, Node<Integer> head3, Node<Integer> p2) {
+        Node<Integer> current = head3; 
+
+        while (head != null) {
+            head2 = p2; 
+            while (head2 != null) {
+                if (head.getValue().equals(head2.getValue())) {
+                    current.setNext(new Node<>(head.getValue()));
+                    current = current.getNext(); 
+                }
+                head2 = head2.getNext(); 
+                }
+            head = head.getNext(); 
+        }
+
+        return head3.getNext(); 
+    }
+
 }
