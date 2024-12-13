@@ -1,3 +1,4 @@
+package lists;
 import java.util.Scanner;
 
 public class Main {
@@ -24,7 +25,7 @@ public class Main {
         System.out.println("ex8: " + ex8(head, head2,head2));
         System.out.println("ex9:");
         ex9(head, head2,head2);
-        System.out.println("ex10: " + ex10(head, head2, head3, head2 ));
+        System.out.println("ex10: " + ex10(head, head2, head2 ));
     }
 
     public static Node<Integer> ex1(int[] arr) {
@@ -174,22 +175,33 @@ public class Main {
     	}
     }
     
-    public static Node<Integer> ex10(Node<Integer> head, Node<Integer> head2, Node<Integer> head3, Node<Integer> p2) {
-        Node<Integer> current = head3; 
+    public static Node<Integer> ex10(Node<Integer> head, Node<Integer> head2, Node<Integer> p2) {
+        Node<Integer> dummy = new Node<>(0);
+        Node<Integer> current = dummy;
 
         while (head != null) {
-            head2 = p2; 
+            head2 = p2;
             while (head2 != null) {
                 if (head.getValue().equals(head2.getValue())) {
                     current.setNext(new Node<>(head.getValue()));
-                    current = current.getNext(); 
+                    current = current.getNext();
+                    break;
                 }
-                head2 = head2.getNext(); 
-                }
-            head = head.getNext(); 
+                head2 = head2.getNext();
+            }
+            head = head.getNext();
         }
 
-        return head3.getNext(); 
+        return dummy.getNext();
     }
-
+    public static Node<Integer> ex11(Node<Integer> head,Node<Integer> head2) {
+        	while(head != null && head2 != null) {
+            if ( head.getValue() == head2.getValue()) {
+            	deleteNode(head, head2);
+            	head= head.getNext();
+            	head2=p2;
+            }
+            	head2=head2.getNext();
+        	}
+        }
 }
