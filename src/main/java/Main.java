@@ -185,6 +185,7 @@ public class Main {
                 if (head.getValue().equals(head2.getValue())) {
                     current.setNext(new Node<>(head.getValue()));
                     current = current.getNext();
+                    head2=null;
                 }
                 head2 = head2.getNext();
             }
